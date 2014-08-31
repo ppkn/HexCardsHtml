@@ -9,34 +9,8 @@ canvas.height = window.innerHeight;
 var isDragging = false;
 var draggingObj;
 
-//testing drag
-function GameObject(imgFile, w, h, point, ctx){
-  var self = this;
-  var img = new Image();
-  this.width = w;
-  this.height = h;
-  this.location = {x:point.x, y:point.y}
-  
-  img.onload = function(){
-   self.Draw();
-  };
-  img.src = imgFile;
-  
-  self.Draw = function(){
-    ctx.drawImage(img, this.location.x, this.location.y, this.width, this.height);
-  }
-  
-  self.ContainsPoint = function(p){
-    if(p.x > this.location.x && p.x < this.location.x+this.width && p.y > this.location.y && p.y < this.location.y+this.height){
-      return true;
-    }
-    else{
-      return false;
-    }
-  }
-}
 
-var cat = new GameObject("img/cat.png", 100, 200, {x:0,y:0}, ctx);
+var cat = new GameObject("img/cat.png", canvas.width/5, canvas.height/5, {x:0,y:0}, ctx);
 
 
 function draw(){
@@ -99,17 +73,6 @@ canvas.addEventListener("touchend", function(evt){
   isDragging = false;
   log.innerText = 'touchend';
 });
-
-
-function getMousePos(evt) {
-  var rect = canvas.getBoundingClientRect();
-  return {
-    x: evt.pageX - rect.left,
-    y: evt.pageY - rect.top
-  };
-}
-
-
 
 // GAME LOOP - might not need this since we could do event based game
 // var FPS = 30;
